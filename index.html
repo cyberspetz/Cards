@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
+    <title>Coaching Card Game</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Coaching Card Game</h1>
+        <div id="card-container">
+            <img id="card" src="cards/card_main.png" alt="Card" onclick="flipCard()">
+        </div>
+        <div id="input-container">
+        
+            <div>
+                <button id="lucky" onclick="luckyCard()">I'm Feeling Lucky</button>
+                <div class="value">1</div>
+                <input id="card-number" type="range" min="1" max="52" step="1" value="1">
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
