@@ -1,6 +1,6 @@
 {
-  "name": "The Cards",
-  "short_name": "Cards",
+  "name": "Conversation Cards",
+  "short_name": "cards",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",

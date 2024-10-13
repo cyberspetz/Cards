@@ -1,9 +1,23 @@
+/* Main title */
+.main-title {
+    font-size: 2em;  /* Increase font size for visibility */
+    text-align: center;  /* Center the main title */
+    margin: 20px 0;  /* Space above and below */
+    color: #7900a9;  /* Title color */
+    font-weight: bold;  /* Make the title bold */
+}
+
 /* Section titles */
 section h2 {
-    font-size: 1.2em;
+    font-size: 1.5em;  /* Increase font size for better visibility */
     margin-top: 20px;
+    margin-bottom: 10px;  /* Add some space below the title */
     color: #333;
+    text-align: center;  /* Center align the text */
+    font-weight: bold;  /* Make the title bold */
 }
+
+
 
 /* Grid layout for each group */
 .card-grid {
@@ -42,7 +56,7 @@ section h2 {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+   
     overflow: hidden;  /* To ensure images fit properly */
 }
 
@@ -75,6 +89,18 @@ section h2 {
     }
 }
 
+
+
+/* Section titles */
+section h2 {
+    font-size: 1.5em;  /* Increase font size for better visibility */
+    margin-top: 20px;
+    margin-bottom: 10px;  /* Add some space below the title */
+    color: #333;
+    text-align: center;  /* Center align the text */
+    font-weight: bold;  /* Make the title bold */
+}
+
 /* Fullscreen mode for the card */
 .card.enlarged {
     position: fixed;
@@ -86,7 +112,7 @@ section h2 {
     max-width: 90vw;   /* Maximum width is 90% of the viewport */
     max-height: 90vh;  /* Maximum height is 90% of the viewport */
     z-index: 999;   /* Ensure the enlarged card appears above everything */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);  /* Stronger shadow for fullscreen */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);  Stronger shadow for fullscreen */
     transition: width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease, transform 0.6s ease;
     perspective: 1000px;
     cursor: pointer;
