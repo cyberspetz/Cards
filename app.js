@@ -1,11 +1,5 @@
+// Sample card data with front and back images
 const deck = [];
-const categories = {
-    exploration: { start: 0, end: 11, gridId: 'exploration-grid' },
-    empathy: { start: 12, end: 21, gridId: 'empathy-grid' },
-    innovation: { start: 22, end: 31, gridId: 'innovation-grid' },
-    navigation: { start: 32, end: 41, gridId: 'navigation-grid' },
-    activation: { start: 42, end: 52, gridId: 'activation-grid' },
-};
 
 // Make sure the correct front and back images for the deck are loaded
 for (let i = 0; i < 53; i++) {
@@ -14,6 +8,16 @@ for (let i = 0; i < 53; i++) {
         back: `cards/card${i}_back.png`     // Correct path to the back image
     });
 }
+
+
+// Card categories
+const categories = {
+    exploration: { title: "Exploration (Curiosity)", start: 0, end: 11, gridId: "exploration-grid" },
+    empathy: { title: "Empathy (Connection)", start: 12, end: 21, gridId: "empathy-grid" },
+    innovation: { title: "Innovation (Seeing what isn’t there yet)", start: 22, end: 31, gridId: "innovation-grid" },
+    navigation: { title: "Navigation (Small Steps)", start: 32, end: 41, gridId: "navigation-grid" },
+    activation: { title: "Activation (Inspired Action)", start: 42, end: 52, gridId: "activation-grid" }
+};
 
 // Function to create the card grid for each category
 function createCardGrid(category) {
@@ -35,8 +39,17 @@ function createCardGrid(category) {
             </div>
         `;
 
-        // Add event listener to flip the card when clicked
-        cardElement.addEventListener('click', () => {
+        // Add event listener to handle flip and enlarge/shrink
+        cardElement.addEventListener('click', (event) => {
+            // If the card is already enlarged, shrink it back
+            if (cardElement.classList.contains('enlarged')) {
+                cardElement.classList.remove('enlarged');
+            } else {
+                // Enlarge the card to fullscreen
+                cardElement.classList.add('enlarged');
+            }
+
+            // Toggle the flip when card is clicked
             cardElement.classList.toggle('flipped');
         });
 
