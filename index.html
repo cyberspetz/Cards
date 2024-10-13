@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="/manifest.json">
-    <title>Coaching Card Game</title>
+    <title>MindShift Cards</title>
 </head>
 <body>
     <div class="container">
-        <h1>Coaching Card Game</h1>
-        <div id="card-container">
-            <img id="card" src="cards/card_main.png" alt="Card" onclick="flipCard()">
-        </div>
-        <div id="input-container">
-        
-            <div>
-                <button id="lucky" onclick="luckyCard()">I'm Feeling Lucky</button>
-                <div class="value">1</div>
-                <input id="card-number" type="range" min="1" max="52" step="1" value="1">
-            </div>
-        </div>
+        <h1>MindShift Cards</h1>
+
+        <section>
+            <h2>Exploration (Curiosity)</h2>
+            <div class="card-grid" id="exploration-grid"></div>
+        </section>
+
+        <section>
+            <h2>Empathy (Connection)</h2>
+            <div class="card-grid" id="empathy-grid"></div>
+        </section>
+
+        <section>
+            <h2>Innovation (Seeing What Isn’t There Yet)</h2>
+            <div class="card-grid" id="innovation-grid"></div>
+        </section>
+
+        <section>
+            <h2>Navigation (Small Steps)</h2>
+            <div class="card-grid" id="navigation-grid"></div>
+        </section>
+
+        <section>
+            <h2>Activation (Inspired Action)</h2>
+            <div class="card-grid" id="activation-grid"></div>
+        </section>
 
     </div>
 

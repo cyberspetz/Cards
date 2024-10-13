@@ -1,73 +1,51 @@
 const deck = [];
-for (let i = 1; i <= 52; i++) {
+const categories = {
+    exploration: { start: 0, end: 11, gridId: 'exploration-grid' },
+    empathy: { start: 12, end: 21, gridId: 'empathy-grid' },
+    innovation: { start: 22, end: 31, gridId: 'innovation-grid' },
+    navigation: { start: 32, end: 41, gridId: 'navigation-grid' },
+    activation: { start: 42, end: 52, gridId: 'activation-grid' },
+};
+
+// Make sure the correct front and back images for the deck are loaded
+for (let i = 0; i < 53; i++) {
     deck.push({
-        front: `/cards/card${i}_front.png`,
-        back: `/cards/card${i}_back.png`
+        front: `cards/card${i}_front.png`,  // Correct path to the front image
+        back: `cards/card${i}_back.png`     // Correct path to the back image
     });
 }
 
-let currentCard = null;
-let isFrontSide = true;
+// Function to create the card grid for each category
+function createCardGrid(category) {
+    const grid = document.getElementById(category.gridId);
 
-var elem = document.querySelector('input[type="range"]');
-var target = document.querySelector('.value');
+    for (let i = category.start; i <= category.end; i++) {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        cardElement.setAttribute('data-index', i);
 
-var rangeValue = function(){
-var newValue = elem.value;
-  
-  
+        cardElement.innerHTML = `
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="${deck[i].front}" alt="Card ${i} Front" />
+                </div>
+                <div class="card-back">
+                    <img src="${deck[i].back}" alt="Card ${i} Back" />
+                </div>
+            </div>
+        `;
+
+        // Add event listener to flip the card when clicked
+        cardElement.addEventListener('click', () => {
+            cardElement.classList.toggle('flipped');
+        });
+
+        // Append card to the grid
+        grid.appendChild(cardElement);
+    }
 }
 
-elem.addEventListener("input", selectCard);
-
-
-// Select a card from the deck based on user input
-function selectCard() {
-
-    const cardNumber = elem.value;;
-    newValue = elem.value;
-    target.innerHTML = newValue;
-    
-    if (isNaN(cardNumber) || cardNumber < 1 || cardNumber > 52) {
-        alert("Please enter a valid card number (1-52).");
-        return;
-    }
-
-    currentCard = deck[cardNumber - 1];
-    isFrontSide = true;
-    document.getElementById('card').src = currentCard.front;
+// Generate the card grids for each category
+for (const key in categories) {
+    createCardGrid(categories[key]);
 }
-
-// Select a card from the deck based on user input
-function luckyCard() {
-    const cardNumber = Math.floor(Math.random() * 52) + 1;
-
-    if (isNaN(cardNumber) || cardNumber < 1 || cardNumber > 52) {
-        alert("Please enter a valid card number (1-52).");
-        return;
-    }
-
-    currentCard = deck[cardNumber - 1];
-    isFrontSide = true;
-  
-    target.innerHTML = cardNumber;
-    document.getElementById('card').src = currentCard.front;
-}
-
-// Flip the card on tap
-function flipCard() {
-    if (!currentCard) {
-        alert("Please select a card first!");
-        return;
-    }
-
-    if (isFrontSide) {
-        document.getElementById('card').src = currentCard.back;
-    } else {
-        document.getElementById('card').src = currentCard.front;
-    }
-
-    isFrontSide = !isFrontSide;
-}
-
-
