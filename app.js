@@ -62,3 +62,26 @@ function createCardGrid(category) {
 for (const key in categories) {
     createCardGrid(categories[key]);
 }
+
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function () {
+        const frontImage = this.querySelector('.card-front img').src;
+        const backImage = this.querySelector('.card-back img').src;
+
+        const enlargedView = document.getElementById('enlarged-view');
+        const frontContainer = document.querySelector('.enlarged-card-front');
+        const backContainer = document.querySelector('.enlarged-card-back');
+
+        // Show the front and back images in the enlarged view
+        frontContainer.innerHTML = `<img src="${frontImage}" alt="Card Front">`;
+        backContainer.innerHTML = `<img src="${backImage}" alt="Card Back">`;
+
+        // Show the enlarged view
+        enlargedView.classList.add('visible');
+    });
+});
+
+// Add event listener to close enlarged view on click
+document.getElementById('enlarged-view').addEventListener('click', function () {
+    this.classList.remove('visible');
+});
