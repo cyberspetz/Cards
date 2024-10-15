@@ -135,14 +135,54 @@ section h2 {
     z-index: 1;
 }
 
+/* 
+/* Responsive adjustments */
+/* @media (max-width: 600px) { */
+    /* .card { */
+        /* width: 260px;  Adjust size for smaller screens */
+        /* height: 360px; */
+    /* } */
+    /* .card-grid { */
+        /* grid-template-columns: repeat(1, 1fr);  2 cards per row for smaller screens */
+    /* } */
+/* } */ 
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {  /* For iPads and smaller screens */
+    .enlarged-card-front, .enlarged-card-back {
+        width: 80%;  /* Make the card images wider on smaller screens */
+        margin: 10px 0;
+    }
+
+    #enlarged-view {
+        flex-direction: column;  /* Stack front and back vertically */
+    }
+
+    .enlarged-card-front img, .enlarged-card-back img {
+        width: 100%;  /* Ensure image fills width on smaller screens */
+        max-height: 90vh;  /* Max height should be viewport height */
+        object-fit: contain;
+    }
+}
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 600px) { /* For phones */
     .card {
-        width: 260px;  /* Adjust size for smaller screens */
-        height: 360px;
+        width: 130px;
+        height: 180px;
     }
     .card-grid {
-        grid-template-columns: repeat(1, 1fr);  /* 2 cards per row for smaller screens */
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for smaller screens */
+    }
+
+    /* When card is enlarged, front and back stack vertically and take full width */
+    #enlarged-view {
+        flex-direction: column;
+    }
+
+    .enlarged-card-front, .enlarged-card-back {
+        width: 90vw;  /* Take full width of the screen on phones */
+        max-height: 45vh;  /* Max height for each side of the card */
     }
 }
