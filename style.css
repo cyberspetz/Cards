@@ -21,10 +21,10 @@ section h2 {
 
 /* Grid layout for each group */
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);  /* Ensure 4 cards per row */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    justify-content: center;
     gap: 10px;  /* Add some space between the cards */
-    justify-items: center;
     padding: 10px;
     margin: 0 auto;  /* Center the grid container */
 }
@@ -186,6 +186,23 @@ section h2 {
     }
 }
 
+/* Responsive adjustments for iPads and larger screens */
+@media (min-width: 601px) and (max-width: 768px) {  /* For iPads */
+    .enlarged-card-front, .enlarged-card-back {
+        width: 60%;  /* Adjust width for iPads */
+    }
+    #enlarged-view {
+        flex-direction: row; /* Side by side for iPads */
+    }
+}
+
+/* Additional adjustments for landscape orientation */
+@media only screen and (orientation: landscape) {
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr); /* Keep 4 cards per row in landscape */
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) { /* For phones */
     .card {
@@ -204,5 +221,13 @@ section h2 {
     .enlarged-card-front, .enlarged-card-back {
         width: 90vw;  /* Take full width of the screen on phones */
         max-height: 45vh;  /* Max height for each side of the card */
+    }
+}
+
+/* Additional adjustments for landscape orientation on iPhone */
+@media only screen and (max-width: 375px) and (orientation: landscape) { 
+    .card {
+        width: 130px;  /* Adjust width for iPhone in landscape */
+        height: 180px; /* Adjust height */
     }
 }
