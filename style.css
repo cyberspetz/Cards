@@ -147,6 +147,26 @@ section h2 {
     /* } */
 /* } */ 
 
+/* Special Styling for the First Card (Card 0) */
+.card-0 {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);  /* Glowing effect */
+    position: relative;
+}
+
+/* Badge or Label for the First Card */
+.card-0::after {
+    content: "Rules & Motivation";
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    background-color: #FFD700;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {  /* For iPads and smaller screens */

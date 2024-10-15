@@ -9,7 +9,6 @@ for (let i = 0; i < 53; i++) {
     });
 }
 
-
 // Card categories
 const categories = {
     exploration: { title: "Exploration (Curiosity)", start: 0, end: 11, gridId: "exploration-grid" },
@@ -26,6 +25,11 @@ function createCardGrid(category) {
     for (let i = category.start; i <= category.end; i++) {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
+
+        // handle separatly a first card to mark for the rules.
+        if (i==0) {
+            cardElement.classList.add('card-0');
+        }
         cardElement.setAttribute('data-index', i);
 
         cardElement.innerHTML = `
@@ -81,7 +85,10 @@ document.querySelectorAll('.card').forEach(card => {
     });
 });
 
+
+
 // Add event listener to close enlarged view on click
 document.getElementById('enlarged-view').addEventListener('click', function () {
     this.classList.remove('visible');
 });
+
