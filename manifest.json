@@ -1,6 +1,6 @@
 {
-  "name": "Conversation Cards",
-  "short_name": "cards",
+  "name": "SustainMind Cards",
+  "short_name": "SustainMind",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
