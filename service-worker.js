@@ -1,7 +1,7 @@
 // ===== SustainMind Service Worker =====
 // Version-based caching with lazy image loading
 
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const SHELL_CACHE = `sm-shell-${CACHE_VERSION}`;
 const IMAGE_CACHE = `sm-images-${CACHE_VERSION}`;
 
@@ -75,10 +75,18 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Shell assets: cache-first, fall back to network
+    // Shell assets: network-first, fall back to cache (so updates load immediately)
     event.respondWith(
-        caches.match(event.request).then(cached => {
-            return cached || fetch(event.request);
+        fetch(event.request).then(response => {
+            // Update the cache with the fresh response
+            if (response.ok) {
+                const clone = response.clone();
+                caches.open(SHELL_CACHE).then(cache => cache.put(event.request, clone));
+            }
+            return response;
+        }).catch(() => {
+            // Offline: serve from cache
+            return caches.match(event.request);
         })
     );
 });
