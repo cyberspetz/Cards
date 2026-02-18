@@ -1,235 +1,667 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-
-/* Main title */
-.main-title {
-    font-size: 2em;  /* Increase font size for visibility */
-    text-align: center;  /* Center the main title */
-    margin: 20px 0;  /* Space above and below */
-    color: #7900a9;  /* Title color */
-    font-weight: bold;  /* Make the title bold */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Section titles */
-section h2 {
-    font-size: 1.5em;  /* Increase font size for better visibility */
-    margin-top: 20px;
-    margin-bottom: 10px;  /* Add some space below the title */
-    color: #333;
-    text-align: center;  /* Center align the text */
-    font-weight: bold;  /* Make the title bold */
+/* ===== Screen System ===== */
+.screen {
+    display: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px 16px 40px;
+    max-width: 600px;
+    margin: 0 auto;
 }
+.screen.active { display: block; }
 
-
-
-/* Grid layout for each group */
-.card-grid {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
-    justify-content: center;
-    gap: 10px;  /* Add some space between the cards */
-    padding: 10px;
-    margin: 0 auto;  /* Center the grid container */
-}
-
-/* Card styling */
-.card {
-    position: relative;
-    width: 160px;  /* Set the card width to fit 4 per row */
-    height: 220px; /* Maintain aspect ratio */
-    perspective: 1000px;  /* 3D flip effect */
+/* ===== Back Button ===== */
+.back-btn {
+    background: none;
+    border: none;
+    color: #b388ff;
+    font-size: 1rem;
     cursor: pointer;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 8px 0;
+    margin-bottom: 12px;
 }
 
-.card-inner {
+/* ===== Landing Screen ===== */
+.landing-header { text-align: center; padding: 24px 0 8px; }
+
+.logo {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+.logo span { color: #b388ff; }
+
+.tagline {
+    color: #888;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.section-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    text-align: center;
+    margin: 28px 0 14px;
+}
+
+/* ===== Daily Card ===== */
+.daily-section { text-align: center; }
+
+.daily-card {
+    width: 160px;
+    height: 224px;
+    margin: 0 auto;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.daily-card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);  /* Smooth flip */
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
     transform-style: preserve-3d;
 }
 
-.card.flipped .card-inner {
+.daily-card.flipped .daily-card-inner {
     transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.daily-card-front, .daily-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 8px;
-   
-    overflow: hidden;  /* To ensure images fit properly */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(179, 136, 255, 0.25);
 }
 
-/* Front side of the card */
-.card-front {
-    z-index: 2;
+.daily-card-back { transform: rotateY(180deg); }
+
+.daily-card-front img, .daily-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Back side of the card */
-.card-back {
-    transform: rotateY(180deg);
-    z-index: 1;
+.daily-hint {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    text-align: center;
 }
 
-/* Images */
-.card-front img, .card-back img {
-    width: 100%;   /* Ensure images fit within the card */
-    height: 100%;  /* Ensure images fit within the card */
-    object-fit: cover;  /* Avoid image distortion */
+/* ===== Direction Buttons ===== */
+.direction-section { text-align: center; }
+
+.direction-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .card {
-        width: 130px;  /* Adjust card size for smaller screens */
-        height: 180px;
-    }
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);  /* 2 cards per row for small screens */
-    }
-    #enlarged-view {
-        flex-direction: column; /* Stack front and back vertically on smaller screens */
-    }
+.direction-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: #16213e;
+    border: 1px solid #2a2a4a;
+    border-radius: 14px;
+    color: #e0e0e0;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 
-/* Enlarged view for selected card */
-#enlarged-view {
+.direction-btn:hover, .direction-btn:active {
+    background: #1f2f55;
+    border-color: #b388ff;
+    transform: scale(1.02);
+}
+
+.direction-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+.direction-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: block;
+}
+
+.direction-sub {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    margin-top: 2px;
+}
+
+/* ===== Action Buttons ===== */
+.mode-section { text-align: center; margin-top: 8px; }
+
+.action-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    margin: 6px 4px;
+    background: #b388ff;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.action-btn:hover, .action-btn:active {
+    background: #ce93d8;
+    transform: scale(1.03);
+}
+
+.action-btn.secondary {
+    background: transparent;
+    border: 2px solid #b388ff;
+    color: #b388ff;
+}
+
+.action-btn.secondary:hover { background: rgba(179, 136, 255, 0.1); }
+
+.action-btn.small {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+}
+
+/* ===== Bottom Nav ===== */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid #2a2a4a;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 8px 4px;
+}
+.nav-link:hover { color: #b388ff; }
+
+/* ===== Screen Title ===== */
+.screen-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* ===== Draw Screen ===== */
+.draw-area {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
-    z-index: 999;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    min-height: 320px;
+    padding: 20px 0;
 }
 
-#enlarged-view.visible {
-    visibility: visible;
-    opacity: 1;
+/* Card base (face-down state) */
+.drawn-card {
+    width: 200px;
+    height: 280px;
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+.drawn-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.drawn-card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.drawn-card-back { transform: rotateY(180deg); }
+
+.drawn-card-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Face down: show a card back pattern */
+.drawn-card.face-down .drawn-card-inner {
+    transform: rotateY(180deg);
+}
+
+.drawn-card.face-down .drawn-card-back {
+    background: linear-gradient(135deg, #2a1a4e, #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drawn-card.face-down .drawn-card-back::after {
+    content: '?';
+    font-size: 4rem;
+    color: #b388ff;
+    opacity: 0.5;
+}
+
+.drawn-card.face-down .drawn-card-back img { display: none; }
+
+/* Revealed: show front */
+.drawn-card.revealed .drawn-card-inner {
+    transform: rotateY(0deg);
+    animation: cardReveal 0.8s ease-out;
+}
+
+/* Flipped after reveal: show back */
+.drawn-card.flipped .drawn-card-inner {
+    transform: rotateY(180deg);
+}
+
+.drawn-card.flipped .drawn-card-back {
+    background: none;
+}
+.drawn-card.flipped .drawn-card-back::after { content: none; }
+.drawn-card.flipped .drawn-card-back img { display: block; }
+
+@keyframes cardReveal {
+    0% { transform: rotateY(180deg) scale(0.8); }
+    50% { transform: rotateY(90deg) scale(1.05); }
+    100% { transform: rotateY(0deg) scale(1); }
+}
+
+.draw-instruction {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    margin: 8px 0 16px;
+}
+
+/* ===== 3-Card Spread ===== */
+.spread-labels {
+    display: flex;
+    justify-content: space-around;
+    max-width: 480px;
+    margin: 0 auto 8px;
+}
+
+.spread-labels span {
+    font-size: 0.75rem;
+    color: #888;
+    text-align: center;
+    flex: 1;
+}
+
+.spread-area {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 0;
+}
+
+.spread-card {
+    width: 110px;
+    height: 154px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.spread-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.spread-card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.spread-card-back { transform: rotateY(180deg); }
+
+.spread-card-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Face down */
+.spread-card.face-down .spread-card-inner {
+    transform: rotateY(180deg);
+}
+
+.spread-card.face-down .spread-card-back {
+    background: linear-gradient(135deg, #2a1a4e, #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spread-card.face-down .spread-card-back::after {
+    content: '?';
+    font-size: 2.5rem;
+    color: #b388ff;
+    opacity: 0.5;
+}
+
+.spread-card.face-down .spread-card-back img { display: none; }
+
+.spread-card.revealed .spread-card-inner {
+    transform: rotateY(0);
+    animation: cardReveal 0.7s ease-out;
+}
+
+.spread-card.flipped .spread-card-inner { transform: rotateY(180deg); }
+.spread-card.flipped .spread-card-back { background: none; }
+.spread-card.flipped .spread-card-back::after { content: none; }
+.spread-card.flipped .spread-card-back img { display: block; }
+
+/* ===== Enlarged View ===== */
+.enlarged-view {
+    background: #111;
+    padding-top: 12px;
+}
+
+.enlarged-images {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px;
 }
 
 .enlarged-card-front, .enlarged-card-back {
-    width: 40%;
-    height: auto;
-    margin: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 0 1 280px;
 }
 
 .enlarged-card-front img, .enlarged-card-back img {
     width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* ===== Reflection ===== */
+.reflection-area {
+    max-width: 400px;
+    margin: 16px auto 0;
+    text-align: center;
+}
+
+.reflection-label {
+    display: block;
+    color: #b388ff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.reflection-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2a2a4a;
+    background: #16213e;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    margin-bottom: 8px;
+}
+
+.reflection-input::placeholder { color: #555; }
+.reflection-input:focus { outline: none; border-color: #b388ff; }
+
+/* ===== Browse All ===== */
+.browse-section { margin-bottom: 24px; }
+
+.browse-category-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #b388ff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.browse-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.browse-card {
+    width: 100px;
+    height: 140px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.browse-card:hover { transform: scale(1.05); }
+
+.browse-card img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
-/* Grid does not move */
-.card-grid {
-    position: relative;
-    z-index: 1;
+/* ===== History ===== */
+.history-list { max-width: 500px; margin: 0 auto; }
+
+.history-empty {
+    text-align: center;
+    color: #666;
+    margin-top: 40px;
+    font-size: 0.95rem;
 }
 
-/* 
-/* Responsive adjustments */
-/* @media (max-width: 600px) { */
-    /* .card { */
-        /* width: 260px;  Adjust size for smaller screens */
-        /* height: 360px; */
-    /* } */
-    /* .card-grid { */
-        /* grid-template-columns: repeat(1, 1fr);  2 cards per row for smaller screens */
-    /* } */
-/* } */ 
-
-/* Special Styling for the First Card (Card 0) */
-.card-0 {
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);  /* Glowing effect */
-    position: relative;
+.history-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: #16213e;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/* Badge or Label for the First Card */
-.card-0::after {
-    content: "Rules & Motivation";
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    background-color: #FFD700;
-    color: #333;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 5px;
+.history-item:hover { background: #1f2f55; }
+
+.history-card-preview {
+    width: 56px;
+    height: 78px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {  /* For iPads and smaller screens */
-    .enlarged-card-front, .enlarged-card-back {
-        width: 80%;  /* Make the card images wider on smaller screens */
-        margin: 10px 0;
-    }
-
-    #enlarged-view {
-        flex-direction: column;  /* Stack front and back vertically */
-    }
-
-    .enlarged-card-front img, .enlarged-card-back img {
-        width: 100%;  /* Ensure image fills width on smaller screens */
-        max-height: 90vh;  /* Max height should be viewport height */
-        object-fit: contain;
-    }
+.history-card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Responsive adjustments for iPads and larger screens */
-@media (min-width: 601px) and (max-width: 768px) {  /* For iPads */
-    .enlarged-card-front, .enlarged-card-back {
-        width: 60%;  /* Adjust width for iPads */
-    }
-    #enlarged-view {
-        flex-direction: row; /* Side by side for iPads */
-    }
+.history-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
 }
 
-/* Additional adjustments for landscape orientation */
-@media only screen and (orientation: landscape) {
-    .card-grid {
-        grid-template-columns: repeat(4, 1fr); /* Keep 4 cards per row in landscape */
-    }
+.history-category {
+    font-weight: 700;
+    color: #b388ff;
+    font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) { /* For phones */
-    .card {
-        width: 130px;
-        height: 180px;
-    }
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for smaller screens */
+.history-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.history-reflection {
+    font-size: 0.85rem;
+    color: #aaa;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+/* ===== How to Play ===== */
+.howto-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.howto-step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #2a2a4a;
+}
+
+.howto-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #b388ff;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.howto-step strong {
+    font-size: 1rem;
+    color: #fff;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.howto-step p {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+.howto-rules-card {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a4a;
+}
+
+.howto-rules-card h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.rules-card-pair {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rules-img {
+    width: 160px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 420px) {
+    .drawn-card {
+        width: 170px;
+        height: 238px;
     }
 
-    /* When card is enlarged, front and back stack vertically and take full width */
-    #enlarged-view {
+    .spread-card {
+        width: 95px;
+        height: 133px;
+    }
+
+    .enlarged-images {
         flex-direction: column;
+        align-items: center;
     }
 
     .enlarged-card-front, .enlarged-card-back {
-        width: 90vw;  /* Take full width of the screen on phones */
-        max-height: 45vh;  /* Max height for each side of the card */
+        flex: 0 1 90vw;
+        max-width: 90vw;
+    }
+
+    .direction-btn {
+        padding: 14px 16px;
+    }
+
+    .browse-card {
+        width: 80px;
+        height: 112px;
+    }
+
+    .rules-img { width: 130px; }
+}
+
+@media (min-width: 421px) and (max-width: 768px) {
+    .enlarged-images {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .enlarged-card-front, .enlarged-card-back {
+        flex: 0 1 70vw;
+        max-width: 70vw;
     }
 }
 
-/* Additional adjustments for landscape orientation on iPhone */
-@media only screen and (max-width: 375px) and (orientation: landscape) { 
-    .card {
-        width: 130px;  /* Adjust width for iPhone in landscape */
-        height: 180px; /* Adjust height */
+@media (min-width: 769px) {
+    .enlarged-card-front, .enlarged-card-back {
+        flex: 0 1 300px;
     }
 }
