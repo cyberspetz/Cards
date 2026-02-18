@@ -1,7 +1,7 @@
 // ===== SustainMind Service Worker =====
 // Version-based caching with lazy image loading
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const SHELL_CACHE = `sm-shell-${CACHE_VERSION}`;
 const IMAGE_CACHE = `sm-images-${CACHE_VERSION}`;
 
