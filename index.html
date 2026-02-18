@@ -2,61 +2,221 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="/icons/favicon-48x48.png" sizes="48x48" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-    <link rel="shortcut icon" href="/icons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="icons/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+    <link rel="shortcut icon" href="icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="SustainMind" />
-    <link rel="manifest" href="/manifest.json" />
-
-
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="manifest.json" />
     <title>SustainMind</title>
 </head>
 <body>
-    <div class="container">
-        <!-- Main Title -->
-        <h1 class="main-title">Sustain Mind</h1>
 
-        <section>
-            <h2>Exploration (Curiosity)</h2>
-            <div class="card-grid" id="exploration-grid"></div>
+    <!-- ========== SCREEN: Landing ========== -->
+    <div id="screen-landing" class="screen active">
+        <header class="landing-header">
+            <h1 class="logo">Sustain<span>Mind</span></h1>
+            <p class="tagline">Coaching cards for mindful growth</p>
+        </header>
+
+        <!-- Daily Card -->
+        <section id="daily-card-section" class="daily-section">
+            <h2 class="section-label">Your Card of the Day</h2>
+            <div id="daily-card" class="daily-card">
+                <div class="daily-card-inner">
+                    <div class="daily-card-front">
+                        <img id="daily-front-img" src="" alt="Daily card front" />
+                    </div>
+                    <div class="daily-card-back">
+                        <img id="daily-back-img" src="" alt="Daily card back" />
+                    </div>
+                </div>
+            </div>
+            <p class="daily-hint">Tap to flip</p>
         </section>
 
-        <section>
-            <h2>Empathy (Connection)</h2>
-            <div class="card-grid" id="empathy-grid"></div>
+        <!-- Direction chooser -->
+        <section class="direction-section">
+            <h2 class="section-label">Choose Your Direction</h2>
+            <div class="direction-grid">
+                <button class="direction-btn" data-category="exploration">
+                    <span class="direction-icon">&#x1F9ED;</span>
+                    <span class="direction-name">Exploration</span>
+                    <span class="direction-sub">Curiosity</span>
+                </button>
+                <button class="direction-btn" data-category="empathy">
+                    <span class="direction-icon">&#x1F49C;</span>
+                    <span class="direction-name">Empathy</span>
+                    <span class="direction-sub">Connection</span>
+                </button>
+                <button class="direction-btn" data-category="innovation">
+                    <span class="direction-icon">&#x1F4A1;</span>
+                    <span class="direction-name">Innovation</span>
+                    <span class="direction-sub">Seeing What Isn't There Yet</span>
+                </button>
+                <button class="direction-btn" data-category="navigation">
+                    <span class="direction-icon">&#x1F9F3;</span>
+                    <span class="direction-name">Navigation</span>
+                    <span class="direction-sub">Small Steps</span>
+                </button>
+                <button class="direction-btn" data-category="activation">
+                    <span class="direction-icon">&#x1F525;</span>
+                    <span class="direction-name">Activation</span>
+                    <span class="direction-sub">Inspired Action</span>
+                </button>
+            </div>
         </section>
 
-        <section>
-            <h2>Innovation (Seeing What Isn’t There Yet)</h2>
-            <div class="card-grid" id="innovation-grid"></div>
+        <!-- Draw mode selector -->
+        <section class="mode-section">
+            <h2 class="section-label">Or Draw from All Cards</h2>
+            <button id="btn-shuffle-draw" class="action-btn">Shuffle &amp; Draw</button>
+            <button id="btn-three-card" class="action-btn secondary">3-Card Spread</button>
         </section>
 
-        <section>
-            <h2>Navigation (Small Steps)</h2>
-            <div class="card-grid" id="navigation-grid"></div>
-        </section>
-
-        <section>
-            <h2>Activation (Inspired Action)</h2>
-            <div class="card-grid" id="activation-grid"></div>
-        </section>
-
+        <!-- Bottom nav -->
+        <nav class="bottom-nav">
+            <button id="btn-how-to-play" class="nav-link">How to Play</button>
+            <button id="btn-browse-all" class="nav-link">Browse All</button>
+            <button id="btn-history" class="nav-link">History</button>
+        </nav>
     </div>
 
-    <!-- Enlarged View for Selected Card -->
-    <div id="enlarged-view" class="enlarged-view hidden">
-        <div class="enlarged-card-front"></div>
-        <div class="enlarged-card-back"></div>
+    <!-- ========== SCREEN: Draw (single card) ========== -->
+    <div id="screen-draw" class="screen">
+        <button class="back-btn" data-target="landing">&larr; Back</button>
+        <h2 id="draw-title" class="screen-title">Draw a Card</h2>
+        <div id="draw-area" class="draw-area">
+            <div id="drawn-card" class="drawn-card face-down">
+                <div class="drawn-card-inner">
+                    <div class="drawn-card-face drawn-card-front">
+                        <img id="drawn-front-img" src="" alt="Card front" />
+                    </div>
+                    <div class="drawn-card-face drawn-card-back">
+                        <img id="drawn-back-img" src="" alt="Card back" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p id="draw-instruction" class="draw-instruction">Tap the card to reveal</p>
+        <button id="btn-draw-another" class="action-btn" style="display:none;">Draw Another</button>
+
+        <!-- Reflection -->
+        <div id="reflection-area" class="reflection-area" style="display:none;">
+            <label for="reflection-input" class="reflection-label">What does this card mean for you right now?</label>
+            <textarea id="reflection-input" class="reflection-input" rows="3" placeholder="Write your thoughts..."></textarea>
+            <button id="btn-save-reflection" class="action-btn small">Save Reflection</button>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN: Three-Card Spread ========== -->
+    <div id="screen-spread" class="screen">
+        <button class="back-btn" data-target="landing">&larr; Back</button>
+        <h2 class="screen-title">3-Card Spread</h2>
+        <div class="spread-labels">
+            <span>Where You Are</span>
+            <span>What's Blocking</span>
+            <span>What to Try</span>
+        </div>
+        <div id="spread-area" class="spread-area">
+            <div class="spread-card face-down" data-pos="0">
+                <div class="spread-card-inner">
+                    <div class="spread-card-face spread-card-front"><img src="" alt="Card 1 front" /></div>
+                    <div class="spread-card-face spread-card-back"><img src="" alt="Card 1 back" /></div>
+                </div>
+            </div>
+            <div class="spread-card face-down" data-pos="1">
+                <div class="spread-card-inner">
+                    <div class="spread-card-face spread-card-front"><img src="" alt="Card 2 front" /></div>
+                    <div class="spread-card-face spread-card-back"><img src="" alt="Card 2 back" /></div>
+                </div>
+            </div>
+            <div class="spread-card face-down" data-pos="2">
+                <div class="spread-card-inner">
+                    <div class="spread-card-face spread-card-front"><img src="" alt="Card 3 front" /></div>
+                    <div class="spread-card-face spread-card-back"><img src="" alt="Card 3 back" /></div>
+                </div>
+            </div>
+        </div>
+        <p class="draw-instruction">Tap each card to reveal</p>
+    </div>
+
+    <!-- ========== SCREEN: Enlarged View ========== -->
+    <div id="screen-enlarged" class="screen enlarged-view">
+        <button class="back-btn" data-target="draw">&larr; Back</button>
+        <div class="enlarged-images">
+            <div class="enlarged-card-front"><img id="enlarged-front-img" src="" alt="Card Front" /></div>
+            <div class="enlarged-card-back"><img id="enlarged-back-img" src="" alt="Card Back" /></div>
+        </div>
+    </div>
+
+    <!-- ========== SCREEN: Browse All ========== -->
+    <div id="screen-browse" class="screen">
+        <button class="back-btn" data-target="landing">&larr; Back</button>
+        <h2 class="screen-title">All Cards</h2>
+        <div id="browse-categories"></div>
+    </div>
+
+    <!-- ========== SCREEN: History ========== -->
+    <div id="screen-history" class="screen">
+        <button class="back-btn" data-target="landing">&larr; Back</button>
+        <h2 class="screen-title">Your Journey</h2>
+        <div id="history-list" class="history-list"></div>
+        <p id="history-empty" class="history-empty">No cards drawn yet. Start your first session!</p>
+    </div>
+
+    <!-- ========== SCREEN: How to Play ========== -->
+    <div id="screen-howto" class="screen">
+        <button class="back-btn" data-target="landing">&larr; Back</button>
+        <h2 class="screen-title">How to Play</h2>
+        <div class="howto-content">
+            <div class="howto-step">
+                <span class="howto-num">1</span>
+                <div>
+                    <strong>Choose Your Direction</strong>
+                    <p>Start by asking yourself: what kind of guidance do I need right now? Pick a category that resonates with where you are.</p>
+                </div>
+            </div>
+            <div class="howto-step">
+                <span class="howto-num">2</span>
+                <div>
+                    <strong>Draw a Card</strong>
+                    <p>Tap the card to reveal it. Let the message land before reacting. What's your first feeling?</p>
+                </div>
+            </div>
+            <div class="howto-step">
+                <span class="howto-num">3</span>
+                <div>
+                    <strong>Flip &amp; Reflect</strong>
+                    <p>Tap again to see the back. The card has two sides, like every situation. Write down what comes up for you.</p>
+                </div>
+            </div>
+            <div class="howto-step">
+                <span class="howto-num">4</span>
+                <div>
+                    <strong>Try the 3-Card Spread</strong>
+                    <p>Draw three cards: <em>Where you are</em>, <em>What's blocking you</em>, and <em>What to try</em>. See the connections between them.</p>
+                </div>
+            </div>
+            <div class="howto-step">
+                <span class="howto-num">5</span>
+                <div>
+                    <strong>Come Back Tomorrow</strong>
+                    <p>Check your Card of the Day. Over time, patterns emerge in the cards you draw. Your journey tells a story.</p>
+                </div>
+            </div>
+        </div>
+        <div class="howto-rules-card">
+            <h3>Rules &amp; Motivation Card</h3>
+            <div id="rules-card-container" class="rules-card-container"></div>
+        </div>
     </div>
 
     <script src="app.js"></script>
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
 </body>
 </html>

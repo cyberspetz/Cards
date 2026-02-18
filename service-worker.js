@@ -1,137 +1,84 @@
-const CACHE_NAME = 'coaching-card-game-cache';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/app.js',
-    '/manifest.json',
-    '/icons/icon-192.png',
-    '/icons/icon-512.png',
-    '/icons/icon-180.png',
-    '/icons/favicon.svg',
-    '/icons/favicon.ico',
-    '/icons/favicon-48x48.png',
-    '/icons/apple-touch-icon.png',
-    // Add all card images
-    '/cards/card1_front.png',
-    '/cards/card1_back.png',
-    '/cards/card2_front.png',
-    '/cards/card2_back.png',
-    '/cards/card3_front.png',
-    '/cards/card3_back.png',
-    '/cards/card4_front.png',
-    '/cards/card4_back.png',
-    '/cards/card5_front.png',
-    '/cards/card5_back.png',
-    '/cards/card6_front.png',
-    '/cards/card6_back.png',
-    '/cards/card7_front.png',
-    '/cards/card7_back.png',
-    '/cards/card8_front.png',
-    '/cards/card8_back.png',
-    '/cards/card9_front.png',
-    '/cards/card9_back.png',
-    '/cards/card10_front.png',
-    '/cards/card10_back.png',
-    '/cards/card11_front.png',
-    '/cards/card11_back.png',
-    '/cards/card12_front.png',
-    '/cards/card12_back.png',
-    '/cards/card13_front.png',
-    '/cards/card13_back.png',
-    '/cards/card14_front.png',
-    '/cards/card14_back.png',
-    '/cards/card15_front.png',
-    '/cards/card15_back.png',
-    '/cards/card16_front.png',
-    '/cards/card16_back.png',
-    '/cards/card16_front.png',
-    '/cards/card17_back.png',
-    '/cards/card18_front.png',
-    '/cards/card18_back.png',
-    '/cards/card19_front.png',
-    '/cards/card19_back.png',
-    '/cards/card20_front.png',
-    '/cards/card20_back.png',
-    '/cards/card21_front.png',
-    '/cards/card21_back.png',
-    '/cards/card22_front.png',
-    '/cards/card22_back.png',
-    '/cards/card23_front.png',
-    '/cards/card23_back.png',
-    '/cards/card24_front.png',
-    '/cards/card24_back.png',
-    '/cards/card25_front.png',
-    '/cards/card25_back.png',
-    '/cards/card26_front.png',
-    '/cards/card26_back.png',
-    '/cards/card27_front.png',
-    '/cards/card27_back.png',
-    '/cards/card28_front.png',
-    '/cards/card28_back.png',
-    '/cards/card29_front.png',
-    '/cards/card29_back.png',
-    '/cards/card30_front.png',
-    '/cards/card30_back.png',
-    '/cards/card31_front.png',
-    '/cards/card31_back.png',
-    '/cards/card32_front.png',
-    '/cards/card32_back.png',
-    '/cards/card33_front.png',
-    '/cards/card33_back.png',
-    '/cards/card34_front.png',
-    '/cards/card34_back.png',
-    '/cards/card36_front.png',
-    '/cards/card36_back.png',
-    '/cards/card37_front.png',
-    '/cards/card37_back.png',
-    '/cards/card38_front.png',
-    '/cards/card38_back.png',
-    '/cards/card39_front.png',
-    '/cards/card39_back.png',
-    '/cards/card40_front.png',
-    '/cards/card40_back.png',
-    '/cards/card41_front.png',
-    '/cards/card41_back.png',
-    '/cards/card42_front.png',
-    '/cards/card42_back.png',
-    '/cards/card43_front.png',
-    '/cards/card43_back.png',
-    '/cards/card44_front.png',
-    '/cards/card44_back.png',
-    '/cards/card45_front.png',
-    '/cards/card45_back.png',
-    '/cards/card46_front.png',
-    '/cards/card46_back.png',
-    '/cards/card47_front.png',
-    '/cards/card47_back.png',
-    '/cards/card48_front.png',
-    '/cards/card48_back.png',
-    '/cards/card49_front.png',
-    '/cards/card49_back.png',
-    '/cards/card50_front.png',
-    '/cards/card50_back.png',
-    '/cards/card51_front.png',
-    '/cards/card51_back.png',
-    '/cards/card52_front.png',
-    '/cards/card52_back.png'
+// ===== SustainMind Service Worker =====
+// Version-based caching with lazy image loading
+
+const CACHE_VERSION = 'v2';
+const SHELL_CACHE = `sm-shell-${CACHE_VERSION}`;
+const IMAGE_CACHE = `sm-images-${CACHE_VERSION}`;
+
+// Shell assets — small, cached on install
+const SHELL_ASSETS = [
+    './',
+    'index.html',
+    'style.css',
+    'app.js',
+    'manifest.json',
+    'icons/icon-192.png',
+    'icons/icon-512.png',
+    'icons/icon-180.png',
+    'icons/favicon.svg',
+    'icons/favicon.ico',
+    'icons/favicon-48x48.png',
+    'icons/apple-touch-icon.png'
 ];
 
-self.addEventListener('install', function(event) {
+// ===== Install: cache shell only =====
+self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(function(cache) {
-                console.log('Opened cache');
-                return cache.addAll(urlsToCache);
-            })
+        caches.open(SHELL_CACHE).then(cache => {
+            return cache.addAll(SHELL_ASSETS);
+        })
+    );
+    // Activate immediately, don't wait for old tabs to close
+    self.skipWaiting();
+});
+
+// ===== Activate: clean old caches =====
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(
+                keys
+                    .filter(key => key !== SHELL_CACHE && key !== IMAGE_CACHE)
+                    .map(key => caches.delete(key))
+            );
+        }).then(() => {
+            // Take control of all open tabs immediately
+            return self.clients.claim();
+        })
     );
 });
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request)
-            .then(function(response) {
-                return response || fetch(event.request);
+// ===== Fetch: cache-first for shell, lazy-cache for images =====
+self.addEventListener('fetch', event => {
+    const url = new URL(event.request.url);
+
+    // Only handle same-origin requests
+    if (url.origin !== location.origin) return;
+
+    // Card images: cache-first, lazy-cache on first fetch
+    if (url.pathname.includes('/cards/')) {
+        event.respondWith(
+            caches.open(IMAGE_CACHE).then(cache => {
+                return cache.match(event.request).then(cached => {
+                    if (cached) return cached;
+
+                    // Not cached yet — fetch from network and cache for next time
+                    return fetch(event.request).then(response => {
+                        if (response.ok) {
+                            cache.put(event.request, response.clone());
+                        }
+                        return response;
+                    });
+                });
             })
+        );
+        return;
+    }
+
+    // Shell assets: cache-first, fall back to network
+    event.respondWith(
+        caches.match(event.request).then(cached => {
+            return cached || fetch(event.request);
+        })
     );
 });
