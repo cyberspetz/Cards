@@ -370,7 +370,17 @@ document.getElementById('btn-history').addEventListener('click', () => {
 
 // ===== Service Worker =====
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
+        // Force-update: unregister any old service workers first
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const reg of registrations) {
+            await reg.unregister();
+        }
+        // Clear all old caches (including the old 'coaching-card-game-cache')
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(name => caches.delete(name)));
+
+        // Register fresh service worker
         navigator.serviceWorker.register('service-worker.js')
             .then(reg => console.log('SW registered:', reg.scope))
             .catch(err => console.error('SW registration failed:', err));
