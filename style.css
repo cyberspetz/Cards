@@ -3,8 +3,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #1a1a2e;
-    color: #e0e0e0;
+    background: #6B1020;
+    color: #F5F0E8;
     min-height: 100vh;
     min-height: 100dvh;
     overflow-x: hidden;
@@ -26,7 +26,7 @@ body {
 .back-btn {
     background: none;
     border: none;
-    color: #b388ff;
+    color: #C8A050;
     font-size: 1rem;
     cursor: pointer;
     padding: 8px 0;
@@ -39,13 +39,13 @@ body {
 .logo {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #fff;
+    color: #F5F0E8;
     letter-spacing: -0.5px;
 }
-.logo span { color: #b388ff; }
+.logo span { color: #C8A050; }
 
 .tagline {
-    color: #888;
+    color: #B8A890;
     font-size: 0.95rem;
     margin-top: 4px;
 }
@@ -54,7 +54,7 @@ body {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: #888;
+    color: #B8A890;
     text-align: center;
     margin: 28px 0 14px;
 }
@@ -89,7 +89,7 @@ body {
     backface-visibility: hidden;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(179, 136, 255, 0.25);
+    box-shadow: 0 4px 24px rgba(200, 160, 80, 0.3);
 }
 
 .daily-card-back { transform: rotateY(180deg); }
@@ -101,7 +101,7 @@ body {
 }
 
 .daily-hint {
-    color: #666;
+    color: #8B7A68;
     font-size: 0.8rem;
     margin-top: 10px;
     text-align: center;
@@ -123,18 +123,18 @@ body {
     align-items: center;
     gap: 14px;
     padding: 16px 20px;
-    background: #16213e;
-    border: 1px solid #2a2a4a;
+    background: #1E1040;
+    border: 1px solid #3A2040;
     border-radius: 14px;
-    color: #e0e0e0;
+    color: #F5F0E8;
     cursor: pointer;
     text-align: left;
     transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 
 .direction-btn:hover, .direction-btn:active {
-    background: #1f2f55;
-    border-color: #b388ff;
+    background: #8B3A1A;
+    border-color: #C8A050;
     transform: scale(1.02);
 }
 
@@ -148,7 +148,7 @@ body {
 
 .direction-sub {
     font-size: 0.8rem;
-    color: #888;
+    color: #B8A890;
     display: block;
     margin-top: 2px;
 }
@@ -160,8 +160,8 @@ body {
     display: inline-block;
     padding: 14px 32px;
     margin: 6px 4px;
-    background: #b388ff;
-    color: #1a1a2e;
+    background: #C8A050;
+    color: #1E1040;
     border: none;
     border-radius: 12px;
     font-size: 1rem;
@@ -171,17 +171,17 @@ body {
 }
 
 .action-btn:hover, .action-btn:active {
-    background: #ce93d8;
+    background: #F5C518;
     transform: scale(1.03);
 }
 
 .action-btn.secondary {
     background: transparent;
-    border: 2px solid #b388ff;
-    color: #b388ff;
+    border: 2px solid #C8A050;
+    color: #C8A050;
 }
 
-.action-btn.secondary:hover { background: rgba(179, 136, 255, 0.1); }
+.action-btn.secondary:hover { background: rgba(200, 160, 80, 0.15); }
 
 .action-btn.small {
     padding: 10px 24px;
@@ -195,18 +195,18 @@ body {
     gap: 24px;
     margin-top: 32px;
     padding-top: 16px;
-    border-top: 1px solid #2a2a4a;
+    border-top: 1px solid #3A2040;
 }
 
 .nav-link {
     background: none;
     border: none;
-    color: #888;
+    color: #B8A890;
     font-size: 0.85rem;
     cursor: pointer;
     padding: 8px 4px;
 }
-.nav-link:hover { color: #b388ff; }
+.nav-link:hover { color: #C8A050; }
 
 /* ===== Screen Title ===== */
 .screen-title {
@@ -214,7 +214,7 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
-    color: #fff;
+    color: #F5F0E8;
 }
 
 /* ===== Draw Screen ===== */
@@ -265,7 +265,7 @@ body {
 }
 
 .drawn-card.face-down .drawn-card-back {
-    background: linear-gradient(135deg, #2a1a4e, #1a1a2e);
+    background: linear-gradient(135deg, #1E1040, #3A5A3A);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +274,7 @@ body {
 .drawn-card.face-down .drawn-card-back::after {
     content: '?';
     font-size: 4rem;
-    color: #b388ff;
+    color: #C8A050;
     opacity: 0.5;
 }
 
@@ -305,7 +305,7 @@ body {
 
 .draw-instruction {
     text-align: center;
-    color: #888;
+    color: #B8A890;
     font-size: 0.85rem;
     margin: 8px 0 16px;
 }
@@ -320,7 +320,7 @@ body {
 
 .spread-labels span {
     font-size: 0.75rem;
-    color: #888;
+    color: #B8A890;
     text-align: center;
     flex: 1;
 }
@@ -370,7 +370,7 @@ body {
 }
 
 .spread-card.face-down .spread-card-back {
-    background: linear-gradient(135deg, #2a1a4e, #1a1a2e);
+    background: linear-gradient(135deg, #1E1040, #3A5A3A);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,7 +379,7 @@ body {
 .spread-card.face-down .spread-card-back::after {
     content: '?';
     font-size: 2.5rem;
-    color: #b388ff;
+    color: #C8A050;
     opacity: 0.5;
 }
 
@@ -397,7 +397,7 @@ body {
 
 /* ===== Enlarged View ===== */
 .enlarged-view {
-    background: #111;
+    background: #0A0818;
     padding-top: 12px;
 }
 
@@ -429,7 +429,7 @@ body {
 
 .reflection-label {
     display: block;
-    color: #b388ff;
+    color: #C8A050;
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 8px;
@@ -439,17 +439,17 @@ body {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #2a2a4a;
-    background: #16213e;
-    color: #e0e0e0;
+    border: 1px solid #3A2040;
+    background: #1E1040;
+    color: #F5F0E8;
     font-size: 0.95rem;
     font-family: inherit;
     resize: vertical;
     margin-bottom: 8px;
 }
 
-.reflection-input::placeholder { color: #555; }
-.reflection-input:focus { outline: none; border-color: #b388ff; }
+.reflection-input::placeholder { color: #7A6A58; }
+.reflection-input:focus { outline: none; border-color: #C8A050; }
 
 /* ===== Browse All ===== */
 .browse-section { margin-bottom: 24px; }
@@ -457,7 +457,7 @@ body {
 .browse-category-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #b388ff;
+    color: #C8A050;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -491,7 +491,7 @@ body {
 
 .history-empty {
     text-align: center;
-    color: #666;
+    color: #8B7A68;
     margin-top: 40px;
     font-size: 0.95rem;
 }
@@ -501,13 +501,13 @@ body {
     gap: 14px;
     padding: 14px;
     margin-bottom: 10px;
-    background: #16213e;
+    background: #1E1040;
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.2s;
 }
 
-.history-item:hover { background: #1f2f55; }
+.history-item:hover { background: #8B3A1A; }
 
 .history-card-preview {
     width: 56px;
@@ -532,18 +532,18 @@ body {
 
 .history-category {
     font-weight: 700;
-    color: #b388ff;
+    color: #C8A050;
     font-size: 0.9rem;
 }
 
 .history-date {
     font-size: 0.8rem;
-    color: #888;
+    color: #B8A890;
 }
 
 .history-reflection {
     font-size: 0.85rem;
-    color: #aaa;
+    color: #C8B8A0;
     font-style: italic;
     margin-top: 4px;
 }
@@ -558,15 +558,15 @@ body {
     display: flex;
     gap: 16px;
     padding: 16px 0;
-    border-bottom: 1px solid #2a2a4a;
+    border-bottom: 1px solid #3A2040;
 }
 
 .howto-num {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #b388ff;
-    color: #1a1a2e;
+    background: #C8A050;
+    color: #1E1040;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -577,14 +577,14 @@ body {
 
 .howto-step strong {
     font-size: 1rem;
-    color: #fff;
+    color: #F5F0E8;
     display: block;
     margin-bottom: 4px;
 }
 
 .howto-step p {
     font-size: 0.9rem;
-    color: #aaa;
+    color: #C8B8A0;
     line-height: 1.5;
 }
 
@@ -592,12 +592,12 @@ body {
     text-align: center;
     margin-top: 28px;
     padding-top: 20px;
-    border-top: 1px solid #2a2a4a;
+    border-top: 1px solid #3A2040;
 }
 
 .howto-rules-card h3 {
     font-size: 1.1rem;
-    color: #fff;
+    color: #F5F0E8;
     margin-bottom: 16px;
 }
 
