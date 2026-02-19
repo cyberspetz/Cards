@@ -63,8 +63,8 @@ body {
 .daily-section { text-align: center; }
 
 .daily-card {
-    width: 160px;
-    height: 224px;
+    width: 200px;
+    height: 280px;
     margin: 0 auto;
     perspective: 1000px;
     cursor: pointer;
@@ -107,50 +107,122 @@ body {
     text-align: center;
 }
 
-/* ===== Direction Buttons ===== */
+/* ===== Direction Wheel ===== */
 .direction-section { text-align: center; }
 
-.direction-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
+.direction-wheel {
+    --wheel-size: 320px;
+    --wheel-radius: 115px;
+    --node-size: 76px;
+    position: relative;
+    width: var(--wheel-size);
+    height: var(--wheel-size);
     margin: 0 auto;
 }
 
-.direction-btn {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 20px;
+/* Connecting ring */
+.direction-wheel::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--wheel-radius) * 2);
+    height: calc(var(--wheel-radius) * 2);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed rgba(200, 160, 80, 0.15);
+    pointer-events: none;
+}
+
+.wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.wheel-mage {
+    font-size: 2.8rem;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 12px rgba(200, 160, 80, 0.5));
+    animation: mageFloat 3s ease-in-out infinite;
+}
+
+@keyframes mageFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.wheel-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 160, 80, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.wheel-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--node-size);
+    height: var(--node-size);
+    margin-top: calc(var(--node-size) / -2);
+    margin-left: calc(var(--node-size) / -2);
+    border-radius: 50%;
     background: #1E1040;
-    border: 1px solid #3A2040;
-    border-radius: 14px;
-    color: #F5F0E8;
+    border: 2px solid #3A2040;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
     cursor: pointer;
-    text-align: left;
-    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    z-index: 1;
+    padding: 0;
+    color: #F5F0E8;
+    /* Position via CSS trig — angle * 72deg for 5 evenly spaced nodes */
+    transform: translate(
+        calc(sin(calc(var(--angle) * 72deg)) * var(--wheel-radius)),
+        calc(cos(calc(var(--angle) * 72deg)) * var(--wheel-radius) * -1)
+    );
 }
 
-.direction-btn:hover, .direction-btn:active {
-    background: #8B3A1A;
+.wheel-node:hover, .wheel-node:active {
     border-color: #C8A050;
-    transform: scale(1.02);
+    background: #8B3A1A;
+    box-shadow: 0 0 20px rgba(200, 160, 80, 0.3);
+    scale: 1.1;
 }
 
-.direction-icon { font-size: 1.8rem; flex-shrink: 0; }
+.wheel-node.selected {
+    border-color: #F5C518;
+    background: #8B3A1A;
+    box-shadow: 0 0 24px rgba(245, 197, 24, 0.4);
+    scale: 1.15;
+}
 
-.direction-name {
-    font-size: 1.1rem;
+.wheel-node-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.wheel-node-label {
+    font-size: 0.55rem;
     font-weight: 700;
-    display: block;
-}
-
-.direction-sub {
-    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
     color: #B8A890;
-    display: block;
-    margin-top: 2px;
 }
 
 /* ===== Action Buttons ===== */
@@ -222,14 +294,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 320px;
+    min-height: 400px;
     padding: 20px 0;
 }
 
 /* Card base (face-down state) */
 .drawn-card {
-    width: 200px;
-    height: 280px;
+    width: 260px;
+    height: 364px;
     perspective: 1200px;
     cursor: pointer;
 }
@@ -333,8 +405,8 @@ body {
 }
 
 .spread-card {
-    width: 110px;
-    height: 154px;
+    width: 120px;
+    height: 168px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -617,13 +689,13 @@ body {
 /* ===== Responsive ===== */
 @media (max-width: 420px) {
     .drawn-card {
-        width: 170px;
-        height: 238px;
+        width: 220px;
+        height: 308px;
     }
 
     .spread-card {
-        width: 95px;
-        height: 133px;
+        width: 100px;
+        height: 140px;
     }
 
     .enlarged-images {
@@ -636,9 +708,15 @@ body {
         max-width: 90vw;
     }
 
-    .direction-btn {
-        padding: 14px 16px;
+    .direction-wheel {
+        --wheel-size: 280px;
+        --wheel-radius: 95px;
+        --node-size: 66px;
     }
+
+    .wheel-mage { font-size: 2.4rem; }
+
+    .wheel-node-label { font-size: 0.5rem; }
 
     .browse-card {
         width: 80px;
