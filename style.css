@@ -400,13 +400,15 @@ body {
 .spread-area {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     padding: 16px 0;
 }
 
 .spread-card {
-    width: 120px;
-    height: 168px;
+    flex: 1;
+    min-width: 0;
+    max-width: 200px;
+    aspect-ratio: 5 / 7;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -693,9 +695,9 @@ body {
         height: 308px;
     }
 
-    .spread-card {
-        width: 100px;
-        height: 140px;
+    .spread-area {
+        gap: 6px;
+        margin: 0 -8px;
     }
 
     .enlarged-images {
