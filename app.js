@@ -69,12 +69,32 @@ function initDailyCard() {
     });
 }
 
-// ===== Direction Selection =====
-document.querySelectorAll('.direction-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const catKey = btn.dataset.category;
+// ===== Direction Wheel =====
+document.querySelectorAll('.wheel-node').forEach((node, index) => {
+    node.addEventListener('click', () => {
+        const catKey = node.dataset.category;
         currentCategory = catKey;
-        startDraw(catKey);
+
+        // Highlight selected node
+        document.querySelectorAll('.wheel-node').forEach(n => n.classList.remove('selected'));
+        node.classList.add('selected');
+
+        // Animate mage toward the chosen direction
+        const mage = document.getElementById('wheel-mage');
+        const angle = index * 72; // degrees clockwise from top
+        const rad = angle * Math.PI / 180;
+        const dx = Math.sin(rad) * 50;
+        const dy = -Math.cos(rad) * 50;
+        mage.style.animation = 'none';
+        mage.style.transform = `translate(${dx}px, ${dy}px) scale(1.3)`;
+
+        // After animation completes, reset and start draw
+        setTimeout(() => {
+            mage.style.transform = '';
+            mage.style.animation = '';
+            node.classList.remove('selected');
+            startDraw(catKey);
+        }, 600);
     });
 });
 

@@ -40,34 +40,33 @@
             <p class="daily-hint">Tap to flip</p>
         </section>
 
-        <!-- Direction chooser -->
+        <!-- Direction Wheel -->
         <section class="direction-section">
             <h2 class="section-label">Choose Your Direction</h2>
-            <div class="direction-grid">
-                <button class="direction-btn" data-category="exploration">
-                    <span class="direction-icon">&#x1F9ED;</span>
-                    <span class="direction-name">Exploration</span>
-                    <span class="direction-sub">Curiosity</span>
+            <div class="direction-wheel">
+                <div class="wheel-center">
+                    <div class="wheel-mage" id="wheel-mage">&#x1F9D9;</div>
+                    <div class="wheel-glow"></div>
+                </div>
+                <button class="wheel-node" data-category="exploration" style="--angle: 0">
+                    <span class="wheel-node-icon">&#x1F9ED;</span>
+                    <span class="wheel-node-label">Exploration</span>
                 </button>
-                <button class="direction-btn" data-category="empathy">
-                    <span class="direction-icon">&#x1F49C;</span>
-                    <span class="direction-name">Empathy</span>
-                    <span class="direction-sub">Connection</span>
+                <button class="wheel-node" data-category="empathy" style="--angle: 1">
+                    <span class="wheel-node-icon">&#x1F49C;</span>
+                    <span class="wheel-node-label">Empathy</span>
                 </button>
-                <button class="direction-btn" data-category="innovation">
-                    <span class="direction-icon">&#x1F4A1;</span>
-                    <span class="direction-name">Innovation</span>
-                    <span class="direction-sub">Seeing What Isn't There Yet</span>
+                <button class="wheel-node" data-category="innovation" style="--angle: 2">
+                    <span class="wheel-node-icon">&#x1F4A1;</span>
+                    <span class="wheel-node-label">Innovation</span>
                 </button>
-                <button class="direction-btn" data-category="navigation">
-                    <span class="direction-icon">&#x1F9F3;</span>
-                    <span class="direction-name">Navigation</span>
-                    <span class="direction-sub">Small Steps</span>
+                <button class="wheel-node" data-category="navigation" style="--angle: 3">
+                    <span class="wheel-node-icon">&#x1F9F3;</span>
+                    <span class="wheel-node-label">Navigation</span>
                 </button>
-                <button class="direction-btn" data-category="activation">
-                    <span class="direction-icon">&#x1F525;</span>
-                    <span class="direction-name">Activation</span>
-                    <span class="direction-sub">Inspired Action</span>
+                <button class="wheel-node" data-category="activation" style="--angle: 4">
+                    <span class="wheel-node-icon">&#x1F525;</span>
+                    <span class="wheel-node-label">Activation</span>
                 </button>
             </div>
         </section>
